@@ -16,7 +16,7 @@ Profiler for django views
 Documentation
 -------------
 
-The full documentation is at https://profiler.readthedocs.org.
+The full documentation is at https://http://django-profile-view.readthedocs.org/.
 
 Quickstart
 ----------
