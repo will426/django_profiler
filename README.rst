@@ -16,7 +16,7 @@ Profiler for django views
 Documentation
 -------------
 
-The full documentation is at https://http://django-profile-view.readthedocs.org/.
+The full documentation is at https://django-profile-view.readthedocs.org/.
 
 Quickstart
 ----------
@@ -25,11 +25,12 @@ Install profile-middleware::
 
     pip install profile-middleware
 
-Then use it in a project::
+Then use it in a project:
 
-    import profile-middleware
+.. include:: docs/usage.rst
 
 Features
 --------
 
-* TODO
+* uses hotshot profiler to give a view
+
