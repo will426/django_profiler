@@ -6,6 +6,6 @@ def rst_generate():
 
 
 def publish():
-    local('rm -f README.rst')
+    # local('rm -f README.rst')
     # rst_generate()
     local('python setup.py sdist upload')
