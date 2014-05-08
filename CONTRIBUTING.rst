@@ -10,10 +10,13 @@ You can contribute in many ways:
 Types of Contributions
 ----------------------
 
+Currently a good way to contribute is editing middleware.py module in profiler directory,
+UI changes are also welcome to make output more useful
+
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at https://github.com/vinu76jsr/profiler/issues.
+Report bugs at https://github.com/vinu76jsr/django-profiler/issues.
 
 If you are reporting a bug, please include:
 
@@ -55,17 +58,17 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `profiler` for local development.
+Ready to contribute? Here's how to set up `profiler_middleware` for local development.
 
-1. Fork the `profiler` repo on GitHub.
+1. Fork the `django_profiler` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/profiler.git
+    $ git clone git@github.com:your_name_here/django_profiler.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
-    $ mkvirtualenv profiler
-    $ cd profiler/
+    $ mkvirtualenv django_profiler
+    $ cd django_profiler/
     $ python setup.py develop
 
 4. Create a branch for local development::

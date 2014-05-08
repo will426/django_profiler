@@ -3,13 +3,13 @@ profile-middleware
 =============================
 
 .. image:: https://badge.fury.io/py/profiler.png
-    :target: https://badge.fury.io/py/profiler
+    :target: https://badge.fury.io/py/django_profiler
 
-.. image:: https://travis-ci.org/vinu76jsr/profiler.png?branch=master
-    :target: https://travis-ci.org/vinu76jsr/profiler
+.. image:: https://travis-ci.org/vinu76jsr/django_profiler.png?branch=master
+    :target: https://travis-ci.org/vinu76jsr/django_profiler
 
-.. image:: https://coveralls.io/repos/vinu76jsr/profiler/badge.png?branch=master
-    :target: https://coveralls.io/r/vinu76jsr/profiler?branch=master
+.. image:: https://coveralls.io/repos/vinu76jsr/django_profiler/badge.png?branch=master
+    :target: https://coveralls.io/r/vinu76jsr/django_profiler?branch=master
 
 Profiler for django views
 
@@ -23,11 +23,11 @@ Quickstart
 
 Install profile-middleware::
 
-    pip install profiler
+    pip install profile-middleware
 
 Then use it in a project::
 
-    import profiler
+    import profile-middleware
 
 Features
 --------
