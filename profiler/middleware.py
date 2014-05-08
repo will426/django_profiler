@@ -1,41 +1,51 @@
 __author__ = 'vaibhav'
 
-import cProfile
+import sys
 import os
-import pstats
+import re
+import hotshot, hotshot.stats
 import tempfile
-from cStringIO import StringIO
-from django.conf import settings
+import StringIO
 from django.template.loader import render_to_string
+
+from django.conf import settings
 
 
 class ProfileMiddleware(object):
 
+    def process_request(self, request):
+        if (settings.DEBUG or request.user.is_superuser) and 'prof' in request.GET:
+            self.tmpfile = tempfile.mktemp()
+            self.profiler = hotshot.Profile(self.tmpfile)
+
     def process_view(self, request, callback, callback_args, callback_kwargs):
-        if settings.DEBUG and 'prof' in request.GET:
-            self.profiler = cProfile.Profile()
-            args = (request,) + callback_args
-            return self.profiler.runcall(callback, *args, **callback_kwargs)
+        if (settings.DEBUG or request.user.is_superuser) and 'prof' in request.GET:
+            return self.profiler.runcall(callback, request, *callback_args, **callback_kwargs)
 
     def process_response(self, request, response):
+
         if settings.DEBUG and 'prof' in request.GET:
-            (fd, self.profiler_file) = tempfile.mkstemp()
-            self.profiler.dump_stats(self.profiler_file)
-            out = StringIO()
-            stats = pstats.Stats(self.profiler_file, stream=out)
-            stats.strip_dirs()          # Must happen prior to sort_stats
-            if request.GET['prof']:
-                stats.sort_stats(request.GET['prof'])
+            self.profiler.close()
+
+            out = StringIO.StringIO()
+            old_stdout = sys.stdout
+            sys.stdout = out
+
+            stats = hotshot.stats.load(self.tmpfile)
+            stats.sort_stats('time', 'calls')
             stats.print_stats()
-            os.unlink(self.profiler_file)
-            profile_output = out.getvalue().split('\n')
-            info = '\n'.join(profile_output[:6])
-            table_header = [_ for _ in profile_output[6].split(' ') if _]
-            table_rows = [_.split() for _ in profile_output[7:-3] if _]
+
+            sys.stdout = old_stdout
+            stats_str = out.getvalue()
+            profile_output = stats_str.split('\n')
+            info = '\n'.join(profile_output[:4])
+            table_header = [_ for _ in profile_output[4].split(' ') if _]
+            table_rows = [_.split() for _ in profile_output[5:-4] if _]
             table_rows = [_[:5] + [' '.join(_[5:])] for _ in table_rows]
+
             ret_dict = dict(table_header=table_header,
                             table_rows=table_rows,
                             info=info)
 
-            response.content = render_to_string('profiler.html', ret_dict)
+            response.content = render_to_string('profiler/profiler.html', ret_dict)
         return response
