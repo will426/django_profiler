@@ -2,8 +2,8 @@
 profile-middleware
 =============================
 
-.. image:: https://badge.fury.io/py/profiler.png
-    :target: https://badge.fury.io/py/django_profiler
+.. image:: https://badge.fury.io/py/profile-middleware.svg
+    :target: http://badge.fury.io/py/profile-middleware
 
 .. image:: https://travis-ci.org/vinu76jsr/django_profiler.png?branch=master
     :target: https://travis-ci.org/vinu76jsr/django_profiler
