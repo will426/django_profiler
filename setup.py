@@ -36,7 +36,6 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'hotshot',
     ],
     license="BSD",
     zip_safe=False,
