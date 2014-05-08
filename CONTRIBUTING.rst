@@ -58,7 +58,7 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `profiler_middleware` for local development.
+Ready to contribute? Here's how to set up `profile_middleware` for local development.
 
 1. Fork the `django_profiler` repo on GitHub.
 2. Clone your fork locally::
