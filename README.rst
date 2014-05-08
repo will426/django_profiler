@@ -27,7 +27,7 @@ Install profile-middleware::
 
 Then use it in a project:
 
-.. include:: docs/usage.rst
+`usage documentation <docs/usage.rst>`
 
 Features
 --------
