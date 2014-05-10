@@ -3,6 +3,13 @@
 History
 -------
 
+0.2.1 (2014-05-09)
+++++++++++++++++++
+
+* Version bump for README changes to be reflected on PyPI
+
+
+
 0.2.0 (2014-05-09)
 ++++++++++++++++++
 
