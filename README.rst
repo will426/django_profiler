@@ -27,8 +27,7 @@ Install profile-middleware::
 
 Then use it in a project:
 
-    `Usage<usage.html>`_
-    `Usage<docs/usage.rst>`_
+:doc:`usage`
 
 Features
 --------
