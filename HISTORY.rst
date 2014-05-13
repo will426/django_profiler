@@ -3,10 +3,11 @@
 History
 -------
 
-0.2.1 (2014-05-09)
+0.2.5 (2014-05-09)
 ++++++++++++++++++
 
-* Shipping with versions of jquery and datatables
+* Shipping with versions of jquery and datatables and images.
+* profiler changed from hotshot to cProfile for performance
 
 
 0.2.1 (2014-05-09)

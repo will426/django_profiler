@@ -32,5 +32,5 @@ Then use it in a project:
 Features
 --------
 
-* uses hotshot profiler to give a view
+* uses cProfile module
 
