@@ -1,46 +1,40 @@
 __author__ = 'vaibhav'
 
-import sys
-import os
-import re
-import hotshot, hotshot.stats
-import tempfile
-import StringIO
-from django.template.loader import render_to_string
-
+try:
+    import cProfile as profile
+except ImportError:
+    import profile
+import pstats
+from cStringIO import StringIO
 from django.conf import settings
+from django.template.loader import render_to_string
 
 
 class ProfileMiddleware(object):
 
-    def process_request(self, request):
-        if (settings.DEBUG or request.user.is_superuser) and 'prof' in request.GET:
-            self.tmpfile = tempfile.mktemp()
-            self.profiler = hotshot.Profile(self.tmpfile)
+    def can(selfself, request):
+        return settings.DEBUG and 'prof' in request.GET
 
     def process_view(self, request, callback, callback_args, callback_kwargs):
-        if (settings.DEBUG or request.user.is_superuser) and 'prof' in request.GET:
-            return self.profiler.runcall(callback, request, *callback_args, **callback_kwargs)
+        if self.can(request):
+            self.profiler = profile.Profile()
+            args = (request,) + callback_args
+            return self.profiler.runcall(callback, *args, **callback_kwargs)
 
     def process_response(self, request, response):
 
-        if settings.DEBUG and 'prof' in request.GET:
-            self.profiler.close()
+        if self.can(request):
+            self.profiler.create_stats()
+            io = StringIO()
+            stats = pstats.Stats(self.profiler, stream=io)
+            stats.strip_dirs().sort_stats(request.GET.get('sort', 'time'))
+            stats.print_stats(int(request.GET.get('count', 100000)))
 
-            out = StringIO.StringIO()
-            old_stdout = sys.stdout
-            sys.stdout = out
-
-            stats = hotshot.stats.load(self.tmpfile)
-            stats.sort_stats('time', 'calls')
-            stats.print_stats()
-
-            sys.stdout = old_stdout
-            stats_str = out.getvalue()
+            stats_str = io.getvalue()
             profile_output = stats_str.split('\n')
             info = '\n'.join(profile_output[:4])
             table_header = [_ for _ in profile_output[4].split(' ') if _]
-            table_rows = [_.split() for _ in profile_output[5:-4] if _]
+            table_rows = [[int(_.split()[0].split('/')[0])] + _.split()[1:] for _ in profile_output[5:-3] if _]
             table_rows = [_[:5] + [' '.join(_[5:])] for _ in table_rows]
 
             ret_dict = dict(table_header=table_header,
