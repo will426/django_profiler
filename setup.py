@@ -30,7 +30,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author='Vaibhav Mishra',
     author_email='vinu76jsr@gmail.com',
-    url='https://github.com/vinu76jsr/profiler',
+    url='https://github.com/vinu76jsr/django_profiler',
     packages=[
         'profiler',
     ],
