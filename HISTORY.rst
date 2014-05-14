@@ -3,7 +3,14 @@
 History
 -------
 
-0.2.5 (2014-05-09)
+0.2.6 (2014-05-14)
+++++++++++++++++++
+
+* Updated project link in setup file - to be reflected on PYPI
+
+
+
+0.2.5 (2014-05-13)
 ++++++++++++++++++
 
 * Shipping with versions of jquery and datatables and images.
