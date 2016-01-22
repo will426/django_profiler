@@ -5,7 +5,7 @@ try:
 except ImportError:
     import profile
 import pstats
-from cStringIO import StringIO
+from io import StringIO
 from django.conf import settings
 from django.template.loader import render_to_string
 
